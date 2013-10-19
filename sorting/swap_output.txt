@@ -1,0 +1,8 @@
+unsorted original list: 
+int: 26054 int: 3051 int: 38586 int: 39549 
+
+sorted list: 
+int: 26054 int: 39549 int: 38586 int: 3051 
+
+sorted buffer: 
+int: 38586 int: 39549 int: 3051 int: 26054 
