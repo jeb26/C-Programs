@@ -6,7 +6,7 @@ int main(int argc, const char *argv[])
 {
 	int mask = 0xf;
 	int i, j;
-	int list[] = {0x65c6, 0xbeb, 0x96ba, 0x9a7d};
+	int list[] = {0xed68, 0xd8ee, -0x61ed, -0x3199};
 	int buffer[GROUP];
 	int *temp, *src, *dest;
 	int cnt[BINS];
@@ -25,7 +25,7 @@ int main(int argc, const char *argv[])
 	putchar('\n');
 	
 	j = 0;
-	while(j < 4)
+	while(j < GROUP)
 	{
 		//initalize count
 		for(i = 0; i < BINS; i++)
@@ -54,7 +54,7 @@ int main(int argc, const char *argv[])
 		//perform swap of list[] and buff[], with int *temp, *src, *dest
 		temp = src;
 		src = dest;
-		dest = src;
+		dest = temp;
 
 		j++;
 	}
@@ -64,7 +64,7 @@ int main(int argc, const char *argv[])
 	printf("list after shifting: \n");
 	for(i = 0; i < GROUP; i++)
 	{
-		printf("int: %d hex: 0x%x ", src[i], src[i]);
+		printf("int: %d ", src[i], src[i]);
 	}
 	putchar('\n');
 
@@ -72,7 +72,7 @@ int main(int argc, const char *argv[])
 	printf("buffer after shifting: \n");
 	for(i = 0; i < GROUP; i++)
 	{
-		printf("int: %d hex: 0x%x ", dest[i], dest[i]);
+		printf("int: %d ", dest[i], dest[i]);
 	}
 	putchar('\n');
 

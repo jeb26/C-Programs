@@ -1,15 +1,20 @@
+/*
+   RADIX SORT FOR UNSIGNED 4 BIT NUMBERS
+*/
 #include <stdio.h>
-#define BINS 16
-#define GROUP 4
+#define BINS 256
+#define N 4
+#define GROUP 8
 #define MASK 0xf
 
 void dump_array(char *message, size_t n, int a[n]);
+void correct();
 
 int main(int argc, const char *argv[])
 {
 	int i, j;
-	int list[] = {0x65c6, 0xbeb, 0x96ba, 0x9a7d};
-	int buffer[GROUP];
+	int list[] = {0x7d8d4e2e,0x7de798ea,0x777f3567, 0x78b4f702};
+	int buffer[N];
 	int *temp, *src_ptr, *dest_ptr;
 	int cnt[BINS];
 	int map[BINS];
@@ -19,10 +24,10 @@ int main(int argc, const char *argv[])
 	dest_ptr = buffer;
 
 	//print unsorted list
-	dump_array("unsorted list: ", GROUP, src_ptr);
+	dump_array("unsorted list: ", N, src_ptr);
 
 	j = 0;
-	while(j <= 4)
+	while(j <= N)
 	{
 		//initalize count
 		for(i = 0; i < BINS; i++)
@@ -61,6 +66,8 @@ int main(int argc, const char *argv[])
 	//printf iA sorted list
 	dump_array("sorted list: ", GROUP, src_ptr);
 
+	//correct(src_ptr);
+
 	return 0;
 }
 
@@ -72,4 +79,29 @@ void dump_array(char *message, size_t n, int a[n])
 	{
 		printf("int: %d hex: 0x%x\n", a[i], a[i]);
 	}
+}
+
+void correct(int *l)
+{
+	int negStartLoc;
+	int *list;
+	int temp[GROUP];
+
+	list = l;
+	int i;
+	for(i = 0; i < GROUP; i++)
+	{
+		if (list[i] < 0)
+		{
+			negStartLoc = i;
+			break;
+		}
+	}
+
+	for(i = 0; i < (GROUP - negStartLoc); i++)
+	{
+		temp[i] = list[negStartLoc + i];
+	}
+
+	dump_array("temp: ", GROUP, temp);
 }
