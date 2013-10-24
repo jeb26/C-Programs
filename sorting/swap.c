@@ -2,10 +2,10 @@
    RADIX SORT FOR UNSIGNED 4 BIT NUMBERS
 */
 #include <stdio.h>
-#define BINS 256
+#define BINS 16
 #define N 4
-#define GROUP 8
-#define MASK 0xf
+#define GROUP 4
+#define MASK 15
 
 void dump_array(char *message, size_t n, int a[n]);
 void correct();
@@ -13,14 +13,15 @@ void correct();
 int main(int argc, const char *argv[])
 {
 	int i, j;
-	int list[] = {0x7d8d4e2e,0x7de798ea,0x777f3567, 0x78b4f702};
+	int list[] = {0x4e2e,0x98ea,0x3567, 0xf702};
+	int nums[] = {20014, 39146, 13671, 63234};
 	int buffer[N];
 	int *temp, *src_ptr, *dest_ptr;
 	int cnt[BINS];
 	int map[BINS];
 	map[0] = 0;
 
-	src_ptr = list;
+	src_ptr = nums;
 	dest_ptr = buffer;
 
 	//print unsorted list
@@ -65,6 +66,7 @@ int main(int argc, const char *argv[])
 
 	//printf iA sorted list
 	dump_array("sorted list: ", GROUP, src_ptr);
+	dump_array("sorted buff: ", GROUP, dest_ptr);
 
 	//correct(src_ptr);
 

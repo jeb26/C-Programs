@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 	int lst[] = {0x7fda8d60, 0x7e03cffb, 0x7b65dedb, 0x7a395300};
 	int sorted[] = {0x7e03cffb,0x7fda8d60,-0x7b65dedb,-0x7a395300};
 	int ints[] = {1021542644 , 2044511900 , 1736498784 , 103143327};
+	//int ints_copy[N], buff2[N]; 
 
 	dump_array("original: ", N, ints);
 	//radix_sort(0, lst, buff);

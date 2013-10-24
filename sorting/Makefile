@@ -1,7 +1,13 @@
-OBJS = radix swap final_radix
+OBJS = radix swap final_radix float_radix array_mv
 CC = gcc
 
-all: radix swap final_radix
+all: radix swap final_radix float_radix array_mv
+
+array_mv:
+	$(CC) array_mv.c -o array_mv
+
+float_radix:
+	$(CC) float_radix.c -o float_radix
 
 final_radix:
 	$(CC) final_radix.c -o final_radix

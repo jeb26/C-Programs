@@ -1,5 +1,5 @@
 /*
-   RADIX SORT FOR UNSIGNED 8 BIT NUMBERS TO MATCH PRACTICE EXAM
+   RADIX SORT FOR UNSIGNED FLOATING POINT 8 BIT NUMBERS TO MATCH PRACTICE EXAM
 */
 #include <stdio.h>
 #define N 4
@@ -16,38 +16,37 @@ int main(int argc, char **argv)
 	int buff[N];
 	int lst[] = {0x7fda8d60, 0x7e03cffb, 0x7b65dedb, 0x7a395300};
 	int sorted[] = {0x7e03cffb,0x7fda8d60,-0x7b65dedb,-0x7a395300};
-	int ints[] = {1021542644 , 2044511900 , 1736498784 , 103143327};
 
-	dump_array("original: ", N, ints);
+	dump_array("original: ", N, sorted);
 	//radix_sort(0, lst, buff);
 
 	//flag = LST;
-	
+	/*
 	for(i =0; i < MAXBIT; i = i + group)
 	{
-		radix_sort(i, ints, buff);
+		radix_sort(i, lst, buff);
 	}
-	
-	//correct(sorted);
-	dump_array("after sort iA: ", N, buff);
+	*/
+	correct(sorted);
+	dump_array("after sort iA: ", N, sorted);
 }
 
-void radix_sort(int idx, int *l, int *b)
+void radix_sort(int idx, float *l, float *b)
 {
-	int i, j, k, mask = 255, group = 8, bin = BIN;	
+	int i, j, k, mask = 0xff, group = 8, bin = BIN;	
 	int tmp[4], count[BIN], map[BIN];
 	int *src_ptr, *dst_ptr;
 
 	//set src_p and dst_p
 	if((idx % 2) == 0)
 	{
-		src_ptr = l;
-		dst_ptr = b;
+		src_ptr = (int *)l;
+		dst_ptr = (int *)b;
 	}
 	else
 	{
-		src_ptr = b;
-		dst_ptr = l;
+		src_ptr = (int *)b;
+		dst_ptr = (int *)l;
 	}
 	
 	//init count, compute cnt
