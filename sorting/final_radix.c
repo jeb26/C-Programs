@@ -15,17 +15,20 @@ int main(int argc, char **argv)
 	int i, group = 8, bin = 256;
 	int buff[N];
 	int lst[] = {0x7fda8d60, 0x7e03cffb, 0x7b65dedb, 0x7a395300};
+	int sorted[] = {0x7e03cffb,0x7fda8d60,-0x7b65dedb,-0x7a395300};
 
-	dump_array("original: ", N, lst);
+	dump_array("original: ", N, sorted);
 	//radix_sort(0, lst, buff);
 
-	//flag = LST;	
+	//flag = LST;
+	/*
 	for(i =0; i < MAXBIT; i = i + group)
 	{
 		radix_sort(i, lst, buff);
-		//correct(lst);
 	}
-	dump_array("after sort iA: ", N, buff);
+	*/
+	correct(sorted);
+	dump_array("after sort iA: ", N, sorted);
 }
 
 void radix_sort(int idx, int *l, int *b)
@@ -82,11 +85,12 @@ void radix_sort(int idx, int *l, int *b)
 	//dump_array("after 1st move: ", N, dst_ptr);
 }
 
-void correct(int *original, int *buffer)
+void correct(int *original)
 {
-	int i, neg_pos, total_negs, total_pos, buff[N];
-	int *ptr = original;
-	int *b = buffer;
+	int i, neg_pos, total_negs, total_pos;
+	int buff[N];
+	int *ptr;
+	ptr = original;
 
 	//determine where negs begin
 	for(i = 0; i < N; i++)
@@ -98,23 +102,25 @@ void correct(int *original, int *buffer)
 		}
 	}
 
+	printf("neg_pos is");
+
 	//compute number of positive and negatives
 	total_negs = (N - neg_pos);
 	total_pos = (N - total_negs);
 	//shift negtives to front of buffer
 	for(i =0; i < total_negs; i++)
 	{
-		b[i] = ptr[i + neg_pos];
+		buff[i] = ptr[i + neg_pos];
 	}
 	//shift positives to end of buff
 	for(i = 0; i < total_pos; i++)
 	{
-		b[i + neg_pos] = ptr[i];
+		buff[i + neg_pos] = ptr[i];
 	}
 	//transfer buff contents to original
 	for(i = 0; i < N; i++)
 	{
-		ptr[i] = b[i];
+		ptr[i] = buff[i];
 	}
 }
 
